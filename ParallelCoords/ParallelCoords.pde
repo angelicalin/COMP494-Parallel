@@ -17,6 +17,7 @@ int clickCount = 0;
 int[] clicked = {0, 0};
 final float FILTERBARHALFWIDTH = 10;
 final float FILTERBARLENGTH = 8;
+HashMap<Integer, Boolean> indexToIfDisplay;
 
 
 
@@ -24,13 +25,12 @@ final float FILTERBARLENGTH = 8;
 void setup() {
   size(1300, 720, P2D);
   background(255);
-  
+  indexToIfDisplay = new HashMap<Integer, Boolean>();
   loadData(data);
  // categoryPos = new float[categories.length];
   pressed = new boolean[categories.length];
   barSpace = (width-2*WIDTHPAD)/(categories.length - 1);
   for(int i = 0; i < categories.length; i++){
-    
     float xPos = i*barSpace+0.5*WIDTHPAD;
    // categoryPos[i] = xPos;
     pressed[i] = false;
@@ -50,7 +50,9 @@ void draw(){
   //Draw individual lines between columns
   for (int i = 0; i < ROWCOUNT; i++){
     for (int j = 0; j < COLUMNCOUNT - 1; j++){
-      line( categories[j].getX(), categories[j].getY(i),  categories[j+1].getX(), categories[j+1].getY(i));
+      if (indexToIfDisplay.get(i)==null){
+        line( categories[j].getX(), categories[j].getY(i),  categories[j+1].getX(), categories[j+1].getY(i));
+      }
     }
   }
   int count = 0;
@@ -77,14 +79,23 @@ void draw(){
 //To fillter the data
 
 void mouseDragged(){
+  boolean moved = false;
   for (int i =0; i < COLUMNCOUNT ; i++){
     if (mouseX >=categories[i].getX()+0.5*BARWIDTH -FILTERBARHALFWIDTH && mouseX <= categories[i].getX()+0.5*BARWIDTH + FILTERBARHALFWIDTH&&
           mouseY >= categories[i].getFilterUpper()-FILTERBARLENGTH && mouseY <=categories[i].getFilterUpper()){
             categories[i].setFilterUpper(mouseY+0.5*FILTERBARLENGTH);
+            moved = true;
     }
      else if (mouseX >=categories[i].getX()+0.5*BARWIDTH -FILTERBARHALFWIDTH && mouseX <= categories[i].getX()+0.5*BARWIDTH + FILTERBARHALFWIDTH&&
           mouseY <= categories[i].getFilterLower()+FILTERBARLENGTH && mouseY >=categories[i].getFilterLower()){
              categories[i].setFilterLower(mouseY-0.5*FILTERBARLENGTH);
+              moved = true;
+    }
+  }
+  if (moved){
+    indexToIfDisplay.clear();
+    for (Category c : categories){
+      indexToIfDisplay.putAll(c.getIndexToIfDisplayMap());
     }
   }
 

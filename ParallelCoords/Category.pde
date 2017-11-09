@@ -1,6 +1,7 @@
 class Category{
   HashMap<Integer, Object> dataEntries;
   HashMap<Integer, Float> indexToYCoord;
+  HashMap<Integer, Boolean> indexToIfDisplay;
   String name;
   String type;
   Float fMin, fMax, x;
@@ -14,6 +15,7 @@ class Category{
     dataEntries = new HashMap<Integer, Object>();
     indexToYCoord = new HashMap<Integer, Float>();
     uniqueEntry = new ArrayList<String>();
+    indexToIfDisplay = new HashMap<Integer, Boolean>();
     name = tempName;
     type = tempType;
     x = tempX;
@@ -27,7 +29,17 @@ class Category{
     filterLower = tempHigh;
   }
   
+  private void checkIfDisplay(){
+    indexToIfDisplay.clear();
+    for (int i = 0 ; i < indexToYCoord.size(); i++){
+      float y = indexToYCoord.get(i);
+      if (y>filterLower || y < filterUpper ){
+        indexToIfDisplay.put(i, false);
+      }
+    }
+  }
   
+
   
   void setX(float newX){
     x = newX;
@@ -37,6 +49,7 @@ class Category{
     //Check if the new position has passed or on the other limit
     if (! (newUpper>=filterLower || newUpper < LOW || newUpper > HIGH)){
       filterUpper = newUpper;
+      checkIfDisplay ();
     }
   }
   
@@ -44,15 +57,14 @@ class Category{
     //Check if the new position has passed or on the other limit
     if (! (newLower<=filterUpper || newLower < LOW || newLower > HIGH)){
       filterLower = newLower;
+      checkIfDisplay ();
     }
   }
   
   float getFilterUpper(){return filterUpper;}
   float getFilterLower(){return filterLower;}
-  
-  float getX(){
-    return x;
-  }
+  HashMap<Integer, Boolean> getIndexToIfDisplayMap(){return indexToIfDisplay;}
+  float getX(){return x;}
   
   void addEntry(Integer index, String value){
     if (type.equals("Integer")){
