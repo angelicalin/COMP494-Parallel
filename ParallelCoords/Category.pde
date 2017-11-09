@@ -6,9 +6,11 @@ class Category{
   Float fMin, fMax, x;
   Integer iMin, iMax;
   ArrayList<String> uniqueEntry;
+  float filterUpper, filterLower;
+  float HIGH, LOW;
   
   
-  Category(String tempName, String tempType, float tempX){
+  Category(String tempName, String tempType, float tempX , float tempHigh, float tempLow){
     dataEntries = new HashMap<Integer, Object>();
     indexToYCoord = new HashMap<Integer, Float>();
     uniqueEntry = new ArrayList<String>();
@@ -19,11 +21,34 @@ class Category{
     fMax = -1.0;
     iMin = -1;
     iMax = -1;
+    HIGH = tempHigh;
+    LOW = tempLow;
+    filterUpper = tempLow;
+    filterLower = tempHigh;
   }
+  
+  
   
   void setX(float newX){
     x = newX;
   }
+  
+  void setFilterUpper(float newUpper){
+    //Check if the new position has passed or on the other limit
+    if (! (newUpper>=filterLower || newUpper < LOW || newUpper > HIGH)){
+      filterUpper = newUpper;
+    }
+  }
+  
+  void setFilterLower(float newLower){
+    //Check if the new position has passed or on the other limit
+    if (! (newLower<=filterUpper || newLower < LOW || newLower > HIGH)){
+      filterLower = newLower;
+    }
+  }
+  
+  float getFilterUpper(){return filterUpper;}
+  float getFilterLower(){return filterLower;}
   
   float getX(){
     return x;
@@ -48,40 +73,40 @@ class Category{
     }
   }
   
-  void setY(float high, float low){
+  void setY(){
     if (type.equals("Integer")){
-      setIntegerY(high, low);
+      setIntegerY();
     }
     else if (type.equals("Float")){
-      setFloatY(high, low);
+      setFloatY();
     }
     else {
-      setStringY(high, low);
+      setStringY();
     }
   }
   
-  void setIntegerY(float high, float low){
-    float len = high - low;
+  void setIntegerY(){
+    float len = HIGH - LOW;
     for (HashMap.Entry<Integer, Object> entry: dataEntries.entrySet()){
       Integer s = (Integer)entry.getValue();
-      indexToYCoord.put(entry.getKey(),len*(((float)iMax-(float)s)/((float)iMax - (float)iMin))+low);
+      indexToYCoord.put(entry.getKey(),len*(((float)iMax-(float)s)/((float)iMax - (float)iMin))+LOW);
     }
   }
   
-  void setFloatY(float high, float low){
-    float len = high - low;
+  void setFloatY(){
+    float len = HIGH - LOW;
     for (HashMap.Entry<Integer, Object> entry: dataEntries.entrySet()){
       Float s = (Float)entry.getValue();
-      indexToYCoord.put(entry.getKey(),len*((fMax-s)/(fMax - fMin))+low);
+      indexToYCoord.put(entry.getKey(),len*((fMax-s)/(fMax - fMin))+LOW);
     }
   }
   
-  void setStringY(float high, float low){
-    float len = high - low;
+  void setStringY(){
+    float len = HIGH - LOW;
     for (HashMap.Entry<Integer, Object> entry: dataEntries.entrySet()){
       String s = (String)entry.getValue();
       int i = uniqueEntry.indexOf(s);
-      indexToYCoord.put(entry.getKey(),i*(len/(uniqueEntry.size() - 1))+low);
+      indexToYCoord.put(entry.getKey(),i*(len/(uniqueEntry.size() - 1))+LOW);
     }
   }
 
