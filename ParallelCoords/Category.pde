@@ -7,7 +7,6 @@ class Category{
   String type;
   Float fMin, fMax, x;
   Integer iMin, iMax;
-  int rowCount;
   ArrayList<String> uniqueEntry;
   float filterUpper, filterLower;
   float HIGH, LOW;
@@ -31,7 +30,6 @@ class Category{
     filterUpper = tempLow;
     filterLower = tempHigh;
     isUpper = false;
-    rowCount = 0;
   }
   
   //Recalculates which links get displayed
@@ -83,7 +81,6 @@ class Category{
   
   //Add's an entry to the category while associating an index to each data point.
   void addEntry(Integer index, String value){
-    rowCount ++;
     if (type.equals("Integer")){
       Integer nValue = Integer.parseInt(value);
       dataEntries.put(index, nValue);
@@ -122,13 +119,13 @@ class Category{
     float range = iMax - iMin;
     if(range < 10.0){
       for (int i = 0; i <= 10; i++){
-        String s = Float.toString(float(i)*range+ iMin);
+        String s = Float.toString(float(i)*range/10+ iMin);
         YCoordToLabel.put(int((10-i)*lenSec + LOW), s);
       }
     }
     else{
       for (int i = 0; i <= 10; i++){
-        String s = Integer.toString(int(i*range + iMin));
+        String s = Integer.toString(int(i*range/10 + iMin));
         YCoordToLabel.put(int((10-i)*lenSec + LOW), s);
       }
     }
@@ -139,13 +136,13 @@ class Category{
     float range = fMax - fMin;
     if(range < 10.0){
       for (int i = 0; i <= 10; i++){
-        String s = Float.toString(float(i)*range + fMin);
+        String s = Float.toString(float(i)*range/10 + fMin);
         YCoordToLabel.put(int((10-i)*lenSec + LOW), s);
       }
     }
     else{
       for (int i = 0; i <= 10; i++){
-        String s = Integer.toString(int(i*range + fMin));
+        String s = Integer.toString(int(i*range/10 + fMin));
         YCoordToLabel.put(int((10-i)*lenSec + LOW), s);
       }
     }
@@ -155,7 +152,7 @@ class Category{
     float len = HIGH - LOW;
     for (HashMap.Entry<Integer, Object> entry: dataEntries.entrySet()){
       String s = (String)entry.getValue();
-      YCoordToLabel.put(int(entry.getKey()*len/rowCount + LOW), s);
+      YCoordToLabel.put(int(entry.getKey()*len/(uniqueEntry.size() - 1) + LOW), s);
     }
   }
   

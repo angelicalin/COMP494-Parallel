@@ -92,12 +92,12 @@ void draw(){
     HashMap<Integer, String> labels = c.getYCoordToLabel();
     if(c.getType().equals("String")){
       if(labels.get(mouseY) != null){
-        text(labels.get(mouseY), c.getX(), mouseY);
+        text(labels.get(mouseY), c.getX()-5, mouseY+7);
       }
     }
     else{
       for(HashMap.Entry<Integer, String> entry: labels.entrySet()){
-        text(entry.getValue(), c.getX(), entry.getKey());
+        text(entry.getValue(), c.getX()-5, entry.getKey()+7);
       }
     }
   }
