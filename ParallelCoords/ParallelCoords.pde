@@ -67,10 +67,10 @@ void draw(){
   for (int i = 0; i < ROWCOUNT; i++){
     for (int j = 0; j < COLUMNCOUNT - 1; j++){
       if (indexToIfDisplay.get(i)==null){
-        float oppacity = 100.0;
+        float oppacity = 75.0;
         //Checks if the labels are being shown over the bar's lines
         if(hovered && (barHovered == j+1)){
-          oppacity = 75.0;
+          oppacity = 50.0;
         }
         stroke(rowIndexToColor.get(i), oppacity);
         line( categories[j].getX()+BARWIDTH/2, categories[j].getY(i),  categories[j+1].getX()+BARWIDTH/2, categories[j+1].getY(i));
@@ -106,9 +106,14 @@ void draw(){
   //Draw the columns and the text
   for(Category c: categories){
     float x = c.getX();
-    textSize(18);
+    textSize(14);
     textAlign(CENTER,BOTTOM);
-    text(c.getCatName(), x, LOW - 10);
+    if(count % 2 == 1 && categories.length > 10){
+      text(c.getCatName(), x, LOW - 25);
+    }
+    else{
+      text(c.getCatName(), x, LOW - 10);
+    }
     
     if(pressed[count]){
       fill(178,255,255);

@@ -119,7 +119,7 @@ class Category{
     float range = iMax - iMin;
     if(range < 10.0){
       for (int i = 0; i <= 10; i++){
-        String s = Float.toString(float(i)*range/10+ iMin);
+        String s = Float.toString(float(i)*range/10 + iMin);
         YCoordToLabel.put(int((10-i)*lenSec + LOW), s);
       }
     }
@@ -200,7 +200,7 @@ class Category{
     if (value > iMax){
       iMax = value;
     }
-    else if (value < iMin || iMin == -1){
+    if (value < iMin || iMin == -1){
       iMin = value;
     }
   }
@@ -210,7 +210,7 @@ class Category{
     if (value > fMax){
       fMax = value;
     }
-    else if (value < fMin || fMin == -1.0){
+    if (value < fMin || fMin == -1.0){
       fMin = value;
     }
   }
