@@ -3,6 +3,7 @@
 ## Sarah Pujol, Haihan Lin
 
 ### Initial Sketch
+![Alt text](?)
 
 ### Final Product
 #### Full Visualization
@@ -14,7 +15,7 @@
 #### Number Label Hovering
 ![Alt text](https://github.com/angelicalin/COMP494-Parallel/blob/master/ParallelCoords/img/Screen%20Shot%202017-11-10%20at%202.21.40%20PM.png)
 
-#### String Label Hovering
+#### String Label Hovering + Column Switch
 ![Alt text](https://github.com/angelicalin/COMP494-Parallel/blob/master/ParallelCoords/img/Screen%20Shot%202017-11-10%20at%202.21.55%20PM.png)
 
 ### Design Decisions and Changes
