@@ -3,7 +3,7 @@
 ## Sarah Pujol, Haihan Lin
 
 ### Initial Sketch
-![Alt text](?)
+![Alt text](https://github.com/angelicalin/COMP494-Parallel/blob/master/ParallelCoords/img/IMG_7367.JPG)
 
 ### Final Product
 #### Full Visualization
