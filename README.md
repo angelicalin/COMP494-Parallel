@@ -3,10 +3,19 @@
 ## Sarah Pujol, Haihan Lin
 
 ### Initial Sketch
-/*include sketch*/
 
 ### Final Product
-/*include screenshot*/
+#### Full Visualization
+![Alt text](https://github.com/angelicalin/COMP494-Parallel/blob/master/ParallelCoords/img/Screen%20Shot%202017-11-10%20at%202.17.40%20PM.png)
+
+#### Data Filtering
+![Alt text](https://github.com/angelicalin/COMP494-Parallel/blob/master/ParallelCoords/img/Screen%20Shot%202017-11-10%20at%202.20.08%20PM.png)
+
+#### Number Label Hovering
+![Alt text](https://github.com/angelicalin/COMP494-Parallel/blob/master/ParallelCoords/img/Screen%20Shot%202017-11-10%20at%202.21.40%20PM.png)
+
+#### String Label Hovering
+![Alt text](https://github.com/angelicalin/COMP494-Parallel/blob/master/ParallelCoords/img/Screen%20Shot%202017-11-10%20at%202.21.55%20PM.png)
 
 ### Design Decisions and Changes
 
